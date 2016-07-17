@@ -7,7 +7,7 @@ import os.path as op
 class Config(object):
     """Base configuration."""
 
-    SECRET_KEY = os.environ.get('LERG_FILES_UPLOAD_SECRET', 'secret-key')  # TODO: Change me
+    SECRET_KEY = os.environ.get('LERG_FILES_UPLOAD_SECRET', 'lerg-secret-key')
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     UPLOADED_FILES_DEST = os.environ.get('LERGS_UPLOADED_FILES_DEST', op.join(APP_DIR, 'static', 'uploaded_lergs'))
     UPLOADS_MAX_FILESIZE = 16 * 1024 * 1024  # max request at 16 megabytes

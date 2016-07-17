@@ -13,7 +13,7 @@ from .factories import UserFactory
 class TestLoggingIn:
     """Login."""
 
-    def test_can_log_in_returns_200(self, user, testapp):
+    def test_can_log_in_returns_302(self, user, testapp):
         """Login successful."""
         # Goes to homepage
         res = testapp.get('/')
@@ -23,7 +23,7 @@ class TestLoggingIn:
         form['password'] = 'myprecious'
         # Submits
         res = form.submit().follow()
-        assert res.status_code == 200
+        assert res.status_code == 302
 
     def test_sees_alert_on_log_out(self, user, testapp):
         """Show alert on logout."""

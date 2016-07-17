@@ -3,6 +3,9 @@
 
 from lerg_files_upload.public.forms import LoginForm
 from lerg_files_upload.user.forms import RegisterForm
+from lerg_files_upload.upload.forms import UploadForm
+import os.path as op
+import os
 
 
 class TestRegisterForm:
@@ -66,3 +69,17 @@ class TestLoginForm:
         form = LoginForm(username=user.username, password='example')
         assert form.validate() is False
         assert 'User not activated' in form.username.errors
+
+
+class TestUploadForm:
+    """Upload Form."""
+
+    def test_validate_file_missing(self, app):
+        form = UploadForm()
+        assert form.validate() is True
+
+    def test_validate_file_exists(self, app):
+        file_upload = op.abspath(op.join(app.config['PROJECT_ROOT'], os.pardir,
+                                       'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
+        form = UploadForm(file_upload=file_upload)
+        assert form.validate() is True
