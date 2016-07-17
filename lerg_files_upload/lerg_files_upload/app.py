@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
-
 from lerg_files_upload import public, user, upload
 from lerg_files_upload.assets import assets
-from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate
+from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, lergs
 from lerg_files_upload.settings import ProdConfig
+from flask_uploads import configure_uploads, patch_request_class
 
 
 def create_app(config_object=ProdConfig):
@@ -31,6 +31,8 @@ def register_extensions(app):
     login_manager.init_app(app)
     debug_toolbar.init_app(app)
     migrate.init_app(app, db)
+    configure_uploads(app, lergs)
+    patch_request_class(app, app.config['UPLOADS_MAX_FILESIZE'])
     return None
 
 

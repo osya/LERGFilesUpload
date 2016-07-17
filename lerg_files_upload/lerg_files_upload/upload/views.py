@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Blueprint
-from flask import render_template
+from flask import Blueprint, render_template, request
 from forms import UploadForm
+from lerg_files_upload.extensions import lergs
+
 
 blueprint = Blueprint('upload', __name__, static_folder='../static')
 
@@ -12,6 +13,7 @@ def admin():
     form = UploadForm()
 
     if form.validate_on_submit():
-        pass
+        if 'file_upload' in request.files and request.files['file_upload'].filename:
+            lergs.save(request.files['file_upload'])
 
     return render_template('upload/upload.html', form=form)
