@@ -3,7 +3,7 @@
 
 from lerg_files_upload.public.forms import LoginForm
 from lerg_files_upload.user.forms import RegisterForm
-from lerg_files_upload.upload.forms import UploadForm
+from lerg_files_upload.lerg.forms import UploadForm
 import os.path as op
 import os
 

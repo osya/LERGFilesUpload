@@ -130,7 +130,7 @@ class TestFileUploading:
         form['password'] = 'myprecious'
         res = form.submit().follow()
 
-        res = testapp.get(url_for('upload.admin'))
+        res = testapp.get(url_for('lerg.admin'))
         file_upload = op.abspath(op.join(testapp.app.config['PROJECT_ROOT'], os.pardir,
                                          'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
         form = res.forms['uploadForm']

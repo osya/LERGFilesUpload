@@ -5,7 +5,7 @@ from forms import UploadForm
 from lerg_files_upload.extensions import lergs
 
 
-blueprint = Blueprint('upload', __name__, static_folder='../static')
+blueprint = Blueprint('lerg', __name__, static_folder='../static')
 
 
 @blueprint.route('/admin', methods=['GET', 'POST'])

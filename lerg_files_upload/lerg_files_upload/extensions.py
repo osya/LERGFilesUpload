@@ -8,6 +8,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
 from flask_uploads import UploadSet, DATA
+from flask_restful import Api
 
 bcrypt = Bcrypt()
 csrf_protect = CsrfProtect()
@@ -17,3 +18,4 @@ migrate = Migrate()
 cache = Cache()
 debug_toolbar = DebugToolbarExtension()
 lergs = UploadSet('lergs', DATA, default_dest=lambda app: app.config.get('UPLOADED_FILES_DEST'))
+api = Api()

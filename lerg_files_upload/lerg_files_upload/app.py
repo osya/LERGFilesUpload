@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
-from lerg_files_upload import public, user, upload
-from lerg_files_upload.assets import assets
-from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, lergs
-from lerg_files_upload.settings import ProdConfig
 from flask_uploads import configure_uploads, patch_request_class
+from lerg_files_upload import public, user, lerg
+from lerg_files_upload.assets import assets
+from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, lergs, \
+    Api
+from lerg_files_upload.settings import ProdConfig
+from lerg_files_upload.lerg.api import LergAPI
 
 
 def create_app(config_object=ProdConfig):
@@ -33,6 +35,8 @@ def register_extensions(app):
     migrate.init_app(app, db)
     configure_uploads(app, lergs)
     patch_request_class(app, app.config['UPLOADS_MAX_FILESIZE'])
+    api = Api(app)
+    api.add_resource(LergAPI, '/api/v1/', endpoint='lerg')
     return None
 
 
@@ -40,7 +44,7 @@ def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
-    app.register_blueprint(upload.views.blueprint)
+    app.register_blueprint(lerg.views.blueprint)
     return None
 
 
