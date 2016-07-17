@@ -4,10 +4,8 @@ from flask import Flask, render_template
 from flask_uploads import configure_uploads, patch_request_class
 from lerg_files_upload import public, user, lerg
 from lerg_files_upload.assets import assets
-from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, lergs, \
-    Api
+from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, lergs
 from lerg_files_upload.settings import ProdConfig
-from lerg_files_upload.lerg.api import LergAPI
 
 
 def create_app(config_object=ProdConfig):
@@ -35,8 +33,6 @@ def register_extensions(app):
     migrate.init_app(app, db)
     configure_uploads(app, lergs)
     patch_request_class(app, app.config['UPLOADS_MAX_FILESIZE'])
-    api = Api(app)
-    api.add_resource(LergAPI, '/api/v1/', endpoint='lerg')
     return None
 
 

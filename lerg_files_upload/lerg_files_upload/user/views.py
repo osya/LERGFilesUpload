@@ -10,4 +10,4 @@ blueprint = Blueprint('user', __name__, url_prefix='/users', static_folder='../s
 @blueprint.route('/')
 @login_required
 def members():
-    return redirect(url_for('lerg.admin'))
+    return redirect(url_for('lerg.upload'))
