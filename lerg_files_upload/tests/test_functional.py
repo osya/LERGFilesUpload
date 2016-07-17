@@ -3,10 +3,10 @@
 
 See: http://webtest.readthedocs.org/
 """
+import os
+import os.path as op
 from flask import url_for
-
 from lerg_files_upload.user.models import User
-
 from .factories import UserFactory
 
 
@@ -118,3 +118,22 @@ class TestRegistering:
         res = form.submit()
         # sees error
         assert 'Username already registered' in res
+
+
+class TestFileUploading:
+    """LERG File uploading."""
+
+    def test_file_uploading(self, user, testapp):
+        res = testapp.get('/')
+        form = res.forms['loginForm']
+        form['username'] = user.username
+        form['password'] = 'myprecious'
+        res = form.submit().follow()
+
+        res = testapp.get(url_for('upload.admin'))
+        file_upload = op.abspath(op.join(testapp.app.config['PROJECT_ROOT'], os.pardir,
+                                         'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
+        form = res.forms['uploadForm']
+        form['file_upload'].data = file_upload
+        res = form.submit()
+        assert res.status_code == 200
