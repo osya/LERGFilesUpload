@@ -2,7 +2,9 @@
 LERG Files Upload
 ===============================
 
-App for LERG files uploads by admin and downloads by customers
+App for LERG files uploads by admin and downloads by customers.
+
+As though only admins will log in to this app the register link and register endpoint disabled. Admin login&password: admin:adminadmin
 
 
 Quickstart
