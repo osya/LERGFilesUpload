@@ -5,7 +5,8 @@
     <br/>
     <form id="uploadForm" action="" class="form" method="POST" role="form" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
-        {{ form.file_upload | safe }}
+        {{ form.file_upload(class="form-control") | safe }}
+        <br>
         <div class="form-group">
             {{ form.submit(class="btn btn-default btn-submit") }}
             <input type="button" value="Log Download" class="btn btn-default" onClick="window.location.href='/log'"/>
