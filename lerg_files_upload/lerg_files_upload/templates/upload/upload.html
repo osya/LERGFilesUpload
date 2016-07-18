@@ -3,8 +3,7 @@
 <div class="container-narrow">
     <h1>LERG Files Upload</h1>
     <br/>
-    <form id="uploadForm" action="{{ url_for('lerg.upload') }}" class="form" method="POST" role="form"
-          enctype="multipart/form-data">
+    <form id="uploadForm" action="" class="form" method="POST" role="form" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         {{ form.file_upload | safe }}
         <div class="form-group">
@@ -13,6 +12,6 @@
         </div>
     </form>
     <h3>Operation Log</h3>
-    <div style="max-height:100px; overflow-y:auto">{{ log_content }}</div>
+    <div style="max-height:200px; overflow-y:auto">{{ log_content }}</div>
 </div>
 {% endblock %}

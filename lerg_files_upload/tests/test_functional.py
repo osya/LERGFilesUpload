@@ -8,6 +8,8 @@ import os.path as op
 from flask import url_for
 from lerg_files_upload.user.models import User
 from .factories import UserFactory
+from webtest import Upload
+import datetime as dt
 
 
 class TestLoggingIn:
@@ -120,20 +122,76 @@ class TestRegistering:
         assert 'Username already registered' in res
 
 
+def login_and_upload(testapp, user):
+    res = testapp.get('/')
+    form = res.forms['loginForm']
+    form['username'] = user.username
+    form['password'] = 'myprecious'
+    form.submit().follow()
+
+    res = testapp.get(url_for('lerg.upload'))
+    form = res.forms['uploadForm']
+    filename = op.abspath(op.join(testapp.app.config['PROJECT_ROOT'], os.pardir,
+                                  'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
+    form['file_upload'] = Upload(filename)
+    return form.submit()
+
+
 class TestFileUploading:
     """LERG File uploading."""
 
     def test_file_uploading(self, user, testapp):
-        res = testapp.get('/')
-        form = res.forms['loginForm']
-        form['username'] = user.username
-        form['password'] = 'myprecious'
-        res = form.submit().follow()
-
-        res = testapp.get(url_for('lerg.admin'))
-        file_upload = op.abspath(op.join(testapp.app.config['PROJECT_ROOT'], os.pardir,
-                                         'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
-        form = res.forms['uploadForm']
-        form['file_upload'].data = file_upload
-        res = form.submit()
+        res = login_and_upload(testapp, user)
         assert res.status_code == 200
+
+
+class TestAPI:
+    """Testing API."""
+
+    def test_get_last_refresh(self, user, testapp, db):
+        res = testapp.get(url_for('lerg.get_last_refresh'))
+        assert res.status_code == 200
+
+    def test_upload_and_get_last_refresh(self, testapp, db, user):
+        login_and_upload(testapp, user)
+        res = testapp.get(url_for('lerg.get_last_refresh'))
+        assert u'last_refresh_date' in res.json_body and res.json_body[u'last_refresh_date'] is not None
+
+    def test_get_lerg(self, testapp, db):
+        date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
+        url = url_for('lerg.get_lerg', date=date)
+        res = testapp.get(url, status=404)
+        assert res.status_code == 404
+
+    def test_upload_and_get_lerg(self, testapp, db, user):
+        login_and_upload(testapp, user)
+        date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
+        url = url_for('lerg.get_lerg', date=date)
+        res = testapp.get(url)
+        assert res.status_code == 200 and res.content_length > 0
+
+    def test_get_lerg_by_cnt_state(self, testapp, db):
+        date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
+        url = url_for('lerg.get_lerg_by_cnt_state', date=date)
+        res = testapp.get(url, status=404)
+        assert res.status_code == 404
+
+    def test_upload_and_get_lerg_by_cnt_state(self, testapp, db, user):
+        login_and_upload(testapp, user)
+        date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
+        url = url_for('lerg.get_lerg_by_cnt_state', date=date)
+        res = testapp.get(url)
+        assert res.status_code == 200 and res.content_length > 0
+
+    def test_get_lerg_by_cnt_state2(self, testapp, db):
+        date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
+        url = url_for('lerg.get_lerg_by_cnt_state2', date=date)
+        res = testapp.get(url, status=404)
+        assert res.status_code == 404
+
+    def test_upload_and_get_lerg_by_cnt_state2(self, testapp, db, user):
+        login_and_upload(testapp, user)
+        date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
+        url = url_for('lerg.get_lerg_by_cnt_state2', date=date)
+        res = testapp.get(url)
+        assert res.status_code == 200 and res.content_length > 0

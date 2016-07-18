@@ -47,7 +47,10 @@ def get_lerg(date):
     Get the latest lerg closest to and before this date
     """
     date = dt.datetime.strptime(date, "%Y-%m-%d")
-    filename = Lerg.query.filter(Lerg.refresh_date <= date).order_by(desc(Lerg.refresh_date)).first().filename
+    lerg = Lerg.query.filter(Lerg.refresh_date <= date).order_by(desc(Lerg.refresh_date)).first()
+    if not lerg:
+        return render_template('404.html'), 404
+    filename = lerg.filename
     path = lergs.path(filename)
     with open(path, 'r') as f:
         body = f.read().decode('utf-8')
@@ -63,7 +66,10 @@ def get_lerg_by_cnt_state(date):
     Fields include should be NPANXX, Country, State
     """
     date = dt.datetime.strptime(date, "%Y-%m-%d")
-    filename = Lerg.query.filter(Lerg.refresh_date <= date).order_by(desc(Lerg.refresh_date)).first().filename
+    lerg = Lerg.query.filter(Lerg.refresh_date <= date).order_by(desc(Lerg.refresh_date)).first()
+    if not lerg:
+        return render_template('404.html'), 404
+    filename = lerg.filename
     path = lergs.path(filename)
 
     with open(path, "rb") as source:
@@ -91,7 +97,10 @@ def get_lerg_by_cnt_state2(date):
     Fields include should be NPANXX, “US”, OCN-LATA
     """
     date = dt.datetime.strptime(date, "%Y-%m-%d")
-    filename = Lerg.query.filter(Lerg.refresh_date <= date).order_by(desc(Lerg.refresh_date)).first().filename
+    lerg = Lerg.query.filter(Lerg.refresh_date <= date).order_by(desc(Lerg.refresh_date)).first()
+    if not lerg:
+        return render_template('404.html'), 404
+    filename = lerg.filename
     path = lergs.path(filename)
 
     with open(path, "rb") as source:
