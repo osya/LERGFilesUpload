@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 """The app module, containing the app factory function."""
+from logging.handlers import RotatingFileHandler
+import os.path as op
 from flask import Flask, render_template
 from flask_uploads import configure_uploads, patch_request_class
 from lerg_files_upload import public, user, lerg
 from lerg_files_upload.assets import assets
-from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, lergs, \
-    log
+from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, \
+    lergs, log
 from lerg_files_upload.settings import ProdConfig
-from logging.handlers import RotatingFileHandler
 
 
 def create_app(config_object=ProdConfig):
@@ -36,7 +37,8 @@ def register_extensions(app):
     configure_uploads(app, lergs)
     patch_request_class(app, app.config['UPLOADS_MAX_FILESIZE'])
     log.init_app(app)
-    handler = RotatingFileHandler(app.config['LOG_FILE_NAME'], maxBytes=10000, backupCount=1)
+    log_file_name = op.join(app.config['APP_DIR'], 'static', app.config['LOG_FILE_NAME'])
+    handler = RotatingFileHandler(log_file_name, maxBytes=10000, backupCount=1)
     app.logger.addHandler(handler)
     return None
 

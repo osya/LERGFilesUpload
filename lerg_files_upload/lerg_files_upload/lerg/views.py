@@ -5,6 +5,7 @@ import csv
 import datetime as dt
 import os.path as op
 from flask import Blueprint, render_template, request, jsonify, make_response
+from flask import send_file
 from flask_login import current_app
 from forms import UploadForm
 from lerg_files_upload.extensions import lergs, db
@@ -25,8 +26,8 @@ def upload():
             Lerg.create(filename=filename, refresh_date=refresh_date)
             current_app.logger.info('%s - Uploaded file %s' % (dt.datetime.utcnow(), filename))
 
-    with open(op.abspath(op.join(current_app.config['PROJECT_ROOT'], current_app.config['LOG_FILE_NAME'])),
-              'r') as log_file:
+    log_file_name = op.join(current_app.config['APP_DIR'], 'static', current_app.config['LOG_FILE_NAME'])
+    with open(log_file_name, 'r') as log_file:
         log_content = log_file.read().decode('utf-8')
     return render_template('upload/upload.html', form=form, log_content=log_content)
 
@@ -109,3 +110,9 @@ def get_lerg_by_cnt_state2(date):
         response = make_response(output.getvalue())
         response.headers['Content-Disposition'] = 'attachment; filename=%s' % filename
         return response
+
+
+@blueprint.route('/log')
+def download_log():
+    log_file_name = op.join(current_app.config['APP_DIR'], 'static', current_app.config['LOG_FILE_NAME'])
+    return send_file(log_file_name, as_attachment=True)
