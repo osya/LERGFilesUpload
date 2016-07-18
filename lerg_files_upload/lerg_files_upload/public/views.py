@@ -47,17 +47,18 @@ def logout():
     return redirect(url_for('public.home'))
 
 
-@blueprint.route('/register/', methods=['GET', 'POST'])
-def register():
-    """Register new user."""
-    form = RegisterForm(request.form, csrf_enabled=False)
-    if form.validate_on_submit():
-        User.create(username=form.username.data, email=form.email.data, password=form.password.data, active=True)
-        flash('Thank you for registering. You can now log in.', 'success')
-        return redirect(url_for('public.home'))
-    else:
-        flash_errors(form)
-    return render_template('public/register.html', form=form)
+# Register endpoint commented due this app intended only for admins. All other users will only use public API
+# @blueprint.route('/register/', methods=['GET', 'POST'])
+# def register():
+#     """Register new user."""
+#     form = RegisterForm(request.form, csrf_enabled=False)
+#     if form.validate_on_submit():
+#         User.create(username=form.username.data, email=form.email.data, password=form.password.data, active=True)
+#         flash('Thank you for registering. You can now log in.', 'success')
+#         return redirect(url_for('public.home'))
+#     else:
+#         flash_errors(form)
+#     return render_template('public/register.html', form=form)
 
 
 @blueprint.route('/about/')
