@@ -4,8 +4,10 @@ from flask import Flask, render_template
 from flask_uploads import configure_uploads, patch_request_class
 from lerg_files_upload import public, user, lerg
 from lerg_files_upload.assets import assets
-from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, lergs
+from lerg_files_upload.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, lergs, \
+    log
 from lerg_files_upload.settings import ProdConfig
+from logging.handlers import RotatingFileHandler
 
 
 def create_app(config_object=ProdConfig):
@@ -33,6 +35,9 @@ def register_extensions(app):
     migrate.init_app(app, db)
     configure_uploads(app, lergs)
     patch_request_class(app, app.config['UPLOADS_MAX_FILESIZE'])
+    log.init_app(app)
+    handler = RotatingFileHandler(app.config['LOG_FILE_NAME'], maxBytes=10000, backupCount=1)
+    app.logger.addHandler(handler)
     return None
 
 
@@ -46,11 +51,13 @@ def register_blueprints(app):
 
 def register_errorhandlers(app):
     """Register error handlers."""
+
     def render_error(error):
         """Render error template."""
         # If a HTTPException, pull the `code` attribute; default to 500
         error_code = getattr(error, 'code', 500)
         return render_template('{0}.html'.format(error_code)), error_code
+
     for errcode in [401, 404, 500]:
         app.errorhandler(errcode)(render_error)
     return None

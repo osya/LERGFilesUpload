@@ -10,4 +10,4 @@ class UploadForm(Form):
     Form for uploading LERG files
     """
     file_upload = FileField("Load Lerg file")
-    submit = SubmitField('Submit')
+    submit = SubmitField('Upload')

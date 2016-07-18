@@ -9,5 +9,7 @@
         {{ form.file_upload | safe }}
         {{ form.submit(class="btn btn-default btn-submit") }}
     </form>
+    <h3>Operation Log</h3>
+    <div style="max-height:100px; overflow-y:auto">{{ log_content }}</div>
 </div>
 {% endblock %}

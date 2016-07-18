@@ -9,6 +9,7 @@ class Config(object):
 
     SECRET_KEY = os.environ.get('LERG_FILES_UPLOAD_SECRET', 'lerg-secret-key')
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
+    LOG_FILE_NAME = 'lerg.log'
     UPLOADED_FILES_DEST = os.environ.get('LERGS_UPLOADED_FILES_DEST', op.join(APP_DIR, 'static', 'uploaded_lergs'))
     UPLOADS_MAX_FILESIZE = 16 * 1024 * 1024  # max request at 16 megabytes
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))

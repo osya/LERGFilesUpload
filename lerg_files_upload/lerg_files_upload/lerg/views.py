@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, request, app, jsonify, make_response
+import StringIO
+import csv
+import datetime as dt
+import os.path as op
+from flask import Blueprint, render_template, request, jsonify, make_response
+from flask_login import current_app
 from forms import UploadForm
 from lerg_files_upload.extensions import lergs, db
 from lerg_files_upload.lerg.models import Lerg
-import datetime as dt
 from sqlalchemy import desc
-import csv
-import StringIO
 
 blueprint = Blueprint('lerg', __name__, static_folder='../static')
 
@@ -21,8 +23,12 @@ def upload():
             filename = lergs.save(request.files['file_upload'])
             refresh_date = dt.datetime.utcnow()
             Lerg.create(filename=filename, refresh_date=refresh_date)
+            current_app.logger.info('%s - Uploaded file %s' % (dt.datetime.utcnow(), filename))
 
-    return render_template('upload/upload.html', form=form)
+    with open(op.abspath(op.join(current_app.config['PROJECT_ROOT'], current_app.config['LOG_FILE_NAME'])),
+              'r') as log_file:
+        log_content = log_file.read().decode('utf-8')
+    return render_template('upload/upload.html', form=form, log_content=log_content)
 
 
 @blueprint.route('/api/v1/getLastRefresh', methods=['GET', 'POST'])
