@@ -22,8 +22,8 @@ Then run the following commands to bootstrap your environment.
 
 ::
 
-    git clone https://github.com/osya/lerg_files_upload
-    cd lerg_files_upload
+    git clone https://github.com/osya/LERGFilesUpload
+    cd LERGFilesUpload
     pip install -r requirements/dev.txt
     bower install
     python manage.py server
