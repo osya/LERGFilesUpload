@@ -27,7 +27,7 @@ def upload():
             current_app.logger.info('%s - Uploaded file %s' % (dt.datetime.utcnow(), filename))
 
     log_file_name = op.join(current_app.config['APP_DIR'], 'static', current_app.config['LOG_FILE_NAME'])
-    with open(log_file_name, 'r') as log_file:
+    with open(log_file_name, 'rU') as log_file:
         log_content = log_file.read().decode('utf-8')
     return render_template('upload/upload.html', form=form, log_content=log_content)
 
