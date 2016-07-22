@@ -7,7 +7,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
-from flask_uploads import UploadSet, DATA
+from flask_uploads import UploadSet, DATA, DOCUMENTS
 from flask_log import Logging
 
 bcrypt = Bcrypt()
@@ -17,5 +17,5 @@ db = SQLAlchemy()
 migrate = Migrate()
 cache = Cache()
 debug_toolbar = DebugToolbarExtension()
-lergs = UploadSet('lergs', DATA, default_dest=lambda app: app.config.get('UPLOADED_FILES_DEST'))
+lergs = UploadSet('lergs', DATA + DOCUMENTS, default_dest=lambda app: app.config.get('UPLOADED_FILES_DEST'))
 log = Logging()
