@@ -22,13 +22,12 @@ Then run the following commands to bootstrap your environment.
 
 ::
 
-    git clone https://github.com/osya/LERGFilesUpload
-    cd LERGFilesUpload
+    git clone http://valeriy@stash.denovolab.com/scm/ulu/alpha
+    cd alpha\lerg_files_upload
     pip install -r requirements/dev.txt
     bower install
     python manage.py server
 
-You will see a pretty welcome screen.
 
 Once you have installed your DBMS, run the following to create your app's database tables and perform the initial migration:
 
@@ -46,6 +45,11 @@ Deployment
 
 In your production environment, make sure the ``LERG_FILES_UPLOAD_ENV`` environment variable is set to ``"prod"``.
 
+Using
+-----
+To upload a file press "Choose File" button, choose file and press "Open" button. File will be uploaded and appears in Operation Log.
+
+To download log press "Log Download" button
 
 Shell
 -----
