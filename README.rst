@@ -2,6 +2,10 @@
 LERG Files Upload
 ===============================
 
+.. image:: https://travis-ci.org/osya/LERGFilesUpload.svg?branch=master
+    :target: https://travis-ci.org/osya/LERGFilesUpload/
+    :alt: Build status
+
 Flask & Jinja2-based webApp for LERG files (some special CSV files) uploading by admin and downloading these files by customers via API.
 
 As though only admins will log in to this app the register link and register endpoint disabled. Admin login&password: admin:adminadmin
