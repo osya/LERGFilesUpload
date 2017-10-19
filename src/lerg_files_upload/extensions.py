@@ -8,6 +8,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import DATA, DOCUMENTS, UploadSet
+from flask_webpack import Webpack
 from flask_wtf.csrf import CSRFProtect
 
 bcrypt = Bcrypt()
@@ -19,3 +20,4 @@ cache = Cache()
 debug_toolbar = DebugToolbarExtension()
 lergs = UploadSet('lergs', DATA + DOCUMENTS, default_dest=lambda app: app.config.get('UPLOADED_FILES_DEST'))
 log = Logging()
+webpack = Webpack()

@@ -1,10 +1,10 @@
-===============================
-LERG Files Upload
-===============================
-
 .. image:: https://travis-ci.org/osya/LERGFilesUpload.svg?branch=master
     :target: https://travis-ci.org/osya/LERGFilesUpload/
     :alt: Build status
+
+===============================
+LERG Files Upload
+===============================
 
 Flask & Jinja2-based webApp for LERG files (some special CSV files) uploading by admin and downloading these files by customers via API.
 
@@ -28,10 +28,11 @@ Then run the following commands to bootstrap your environment.
 
 ::
 
-    git clone http://valeriy@stash.denovolab.com/scm/ulu/alpha
-    cd alpha\lerg_files_upload
+    git clone https://github.com/osya/LERGFilesUpload
+    cd LERGFilesUpload
     pip install -r requirements/dev.txt
-    bower install
+    npm install
+    node node_modules/webpack/bin/webpack.js
     python manage.py server
 
 

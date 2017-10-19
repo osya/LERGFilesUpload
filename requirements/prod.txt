@@ -26,9 +26,8 @@ wtforms-parsleyjs==2.0.1
 gunicorn>=19.1.1
 
 # Assets
-Flask-Assets==0.12
-cssmin>=0.2.0
-jsmin>=2.2.2
+Flask-Webpack==0.1.0
+jinja2-webpack==0.1.4
 
 # Auth
 Flask-Login==0.4.0

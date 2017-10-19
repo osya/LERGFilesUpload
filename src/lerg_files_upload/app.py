@@ -6,9 +6,8 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template
 from flask_uploads import configure_uploads, patch_request_class
 
-from lerg_files_upload.assets import assets
 from lerg_files_upload.extensions import (bcrypt, cache, csrf_protect, db, debug_toolbar, lergs, log, login_manager,
-                                          migrate)
+                                          migrate, webpack)
 from lerg_files_upload.lerg.views import blueprint as lerg_blueprint
 from lerg_files_upload.public.views import blueprint as public_blueprint
 from lerg_files_upload.settings import ProdConfig
@@ -20,7 +19,8 @@ def create_app(config_object=ProdConfig):
 
     :param config_object: The configuration object to use.
     """
-    app = Flask(__name__)
+    # TODO: Find the better way to serving static files in Flask in dev & prod
+    app = Flask(__name__, static_url_path='/static', static_folder=os.path.join('static', 'dist'))
     app.config.from_object(config_object)
     register_extensions(app)
     register_blueprints(app)
@@ -30,7 +30,7 @@ def create_app(config_object=ProdConfig):
 
 def register_extensions(app):
     """Register Flask extensions."""
-    assets.init_app(app)
+    webpack.init_app(app)
     bcrypt.init_app(app)
     cache.init_app(app)
     db.init_app(app)

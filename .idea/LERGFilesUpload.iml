@@ -5,7 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/env" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.6.0 virtualenv at E:\Work\IdeaProjects\Flask\LERGFilesUpload\env (1)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.6.0 virtualenv at E:\Work\web-frameworks\Python\Flask\LERGFilesUpload\env" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
@@ -15,7 +15,7 @@
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/lerg_files_upload/lerg_files_upload/templates" />
+        <option value="$MODULE_DIR$/src/lerg_files_upload/templates" />
       </list>
     </option>
   </component>

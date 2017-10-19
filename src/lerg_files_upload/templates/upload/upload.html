@@ -17,11 +17,5 @@
 </div>
 {% endblock %}
 {% block js %}
-    <script>
-        $(function() {
-            $("#file_upload").click(function() {
-                $("#submit").prop("disabled", false)
-            });
-        });
-    </script>
+    {{ javascript_tag('upload') | safe }}
 {% endblock %}
