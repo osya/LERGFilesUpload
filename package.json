@@ -16,5 +16,12 @@
     "postcss-loader": "^2.0.8",
     "url-loader": "^0.6.2",
     "webpack": "^3.8.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "eslint": "^4.9.0",
+    "eslint-config-default": "^0.2.1",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-react": "^7.4.0"
   }
 }
