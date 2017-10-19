@@ -34,7 +34,7 @@ class TestLoggingIn:
         form['username'] = user.username
         form['password'] = 'myprecious'
         # Submits
-        res = form.submit().follow()
+        form.submit().follow()
         res = testapp.get(url_for('public.logout')).follow()
         # sees alert
         assert 'You are logged out.' in res
@@ -148,11 +148,11 @@ class TestFileUploading:
 class TestAPI:
     """Testing API."""
 
-    def test_get_last_refresh(self, user, testapp, db):
+    def test_get_last_refresh(self, testapp, db):
         res = testapp.get(url_for('lerg.get_last_refresh'))
         assert res.status_code == 200
 
-    def test_upload_and_get_last_refresh(self, testapp, db, user):
+    def test_upload_and_get_last_refresh(self, testapp, user):
         login_and_upload(testapp, user)
         res = testapp.get(url_for('lerg.get_last_refresh'))
         assert 'last_refresh_date' in res.json_body and res.json_body['last_refresh_date'] is not None
@@ -163,7 +163,7 @@ class TestAPI:
         res = testapp.get(url, status=404)
         assert res.status_code == 404
 
-    def test_upload_and_get_lerg(self, testapp, db, user):
+    def test_upload_and_get_lerg(self, testapp, user):
         login_and_upload(testapp, user)
         date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
         url = url_for('lerg.get_lerg', date=date)
@@ -176,7 +176,7 @@ class TestAPI:
         res = testapp.get(url, status=404)
         assert res.status_code == 404
 
-    def test_upload_and_get_lerg_by_cnt_state(self, testapp, db, user):
+    def test_upload_and_get_lerg_by_cnt_state(self, testapp, user):
         login_and_upload(testapp, user)
         date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
         url = url_for('lerg.get_lerg_by_cnt_state', date=date)
@@ -189,7 +189,7 @@ class TestAPI:
         res = testapp.get(url, status=404)
         assert res.status_code == 404
 
-    def test_upload_and_get_lerg_by_cnt_state2(self, testapp, db, user):
+    def test_upload_and_get_lerg_by_cnt_state2(self, testapp, user):
         login_and_upload(testapp, user)
         date = dt.datetime.utcnow().date() + dt.timedelta(days=1)
         url = url_for('lerg.get_lerg_by_cnt_state2', date=date)

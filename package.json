@@ -4,6 +4,9 @@
   "browserslist": [
     "last 4 versions"
   ],
+  "eslintConfig": {
+    "env": { "es6": true }
+  },
   "dependencies": {
     "autoprefixer": "^7.1.5",
     "bootstrap": "^3.3.7",
@@ -14,13 +17,13 @@
     "jquery": "^3.2.1",
     "manifest-revision-webpack-plugin": "^0.4.1",
     "postcss-loader": "^2.0.8",
+    "sync-exec": "^0.6.2",
     "url-loader": "^0.6.2",
     "webpack": "^3.8.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
     "eslint": "^4.9.0",
-    "eslint-config-default": "^0.2.1",
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-react": "^7.4.0"
   }

@@ -1,5 +1,6 @@
-$(function() {
-    $("#file_upload").click(function() {
-        $("#submit").prop("disabled", false)
+"use strict";
+$(function () {
+    $("#file_upload").click(function () {
+        $("#submit").prop("disabled", false);
     });
 });
