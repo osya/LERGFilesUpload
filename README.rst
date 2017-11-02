@@ -2,7 +2,7 @@
     :target: https://travis-ci.org/osya/LERGFilesUpload/
     :alt: Build status
 .. image:: https://coveralls.io/repos/github/osya/LERGFilesUpload/badge.svg?branch=master
-:target: https://coveralls.io/github/osya/LERGFilesUpload?branch=master
+    :target: https://coveralls.io/github/osya/LERGFilesUpload?branch=master
 
 ===============================
 LERG Files Upload
