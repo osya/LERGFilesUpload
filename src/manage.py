@@ -5,6 +5,7 @@ import os
 from glob import glob
 from subprocess import call
 
+from decouple import config
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Command, Manager, Option, Server, Shell
 from flask_script.commands import Clean, ShowUrls
@@ -14,7 +15,7 @@ from lerg_files_upload.database import db
 from lerg_files_upload.settings import DevConfig, ProdConfig
 from lerg_files_upload.user.models import User
 
-CONFIG = ProdConfig if os.environ.get('LERG_FILES_UPLOAD_ENV') == 'prod' else DevConfig
+CONFIG = ProdConfig if config('LERG_FILES_UPLOAD_ENV', default='dev') == 'prod' else DevConfig
 HERE = os.path.abspath(os.path.dirname(__file__))
 TEST_PATH = os.path.join(HERE, 'tests')
 

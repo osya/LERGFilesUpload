@@ -300,3 +300,4 @@ out/
 /src/lerg_files_upload/static/dist/
 /src/lerg_files_upload/static/uploaded_lergs/
 /node_modules/
+/.env

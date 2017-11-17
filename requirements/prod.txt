@@ -35,3 +35,5 @@ Flask-Bcrypt==0.7.1
 
 # Caching
 Flask-Cache>=0.13.1
+
+python-decouple~=3.1
