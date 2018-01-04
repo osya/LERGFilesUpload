@@ -11,13 +11,15 @@ const rootAssetPath = path.join(__dirname, "src", "lerg_files_upload", "static")
         return {
             entry: {
                 main: [
+                    path.join(rootAssetPath, "css", "style.css")
+                ],
+                vendor: [
                     "jquery",
                     "bootstrap",
                     "bootstrap/dist/css/bootstrap.css",
                     "font-awesome/css/font-awesome.min.css",
-                    path.join(rootAssetPath, "css", "style.css")
-                ],
-                upload: path.join(rootAssetPath, "js", "upload.js")
+                    path.join(rootAssetPath, "js", "upload.js")
+                ]
             },
             output: {
                 path: path.join(rootAssetPath, "dist"),

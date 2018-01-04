@@ -21,6 +21,7 @@
   <meta name="viewport" content="width=device-width">
 
   {{ stylesheet_tag('main') | safe }}
+  {{ stylesheet_tag('vendor') | safe }}
   {% block css %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">

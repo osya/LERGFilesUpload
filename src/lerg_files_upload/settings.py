@@ -26,7 +26,7 @@ class ProdConfig(Config):
     """Production configuration."""
 
     ENV = 'prod'
-    DEBUG = config('DEBUG', default=False, cast=bool)
+    DEBUG = False
     DEBUG_TB_ENABLED = config('DEBUG_TB_ENABLED', default=False, cast=bool)
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/example'  # TODO: Change me
 
@@ -35,7 +35,7 @@ class DevConfig(Config):
     """Development configuration."""
 
     ENV = 'dev'
-    DEBUG = config('DEBUG', default=True, cast=bool)
+    DEBUG = True
     DEBUG_TB_ENABLED = config('DEBUG_TB_ENABLED', default=True, cast=bool)
     DB_NAME = 'dev.db'
     # Put the db file in project root
@@ -48,7 +48,6 @@ class TestConfig(Config):
     """Test configuration."""
 
     TESTING = True
-    DEBUG = config('DEBUG', default=True, cast=bool)
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
     BCRYPT_LOG_ROUNDS = 4  # For faster tests; needs at least 4 to avoid "ValueError: Invalid rounds"
     WTF_CSRF_ENABLED = False  # Allows form testing
