@@ -10,6 +10,7 @@ As though only admins will log in to this app the register link and register end
 
 Used technologies:
 
+- Flask & Jinja2
 - Testing: pytest, factory-boy, and WebTest
 - Assets management: NPM & Webpack
 - Travis CI
