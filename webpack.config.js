@@ -5,11 +5,10 @@
     const webpack = require("webpack");
 
     (function (extractCss, webpack2) {
-        const path = require("path");
-        const ManifestRevisionPlugin = require("manifest-revision-webpack-plugin");
-        const rootAssetPath = path.join(__dirname, "src", "lerg_files_upload", "static");
-
         module.exports = (env) => {
+            const path = require("path");
+            const ManifestRevisionPlugin = require("manifest-revision-webpack-plugin");
+            const rootAssetPath = path.join(__dirname, "src", "lerg_files_upload", "static");
             const isDevBuild = !(env && env.prod);
             return {
                 entry: {
