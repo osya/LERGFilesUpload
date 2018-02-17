@@ -32,7 +32,7 @@ Then run the following commands to bootstrap your environment.
     cd LERGFilesUpload
     pip install -r requirements/dev.txt
     npm install
-    node node_modules/webpack/bin/webpack.js
+    npm run webpack:deploy
 ```
 
 Migrate your database and run `python manage.py server`

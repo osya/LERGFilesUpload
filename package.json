@@ -5,7 +5,9 @@
     "last 4 versions"
   ],
   "eslintConfig": {
-    "env": { "es6": true }
+    "env": {
+      "es6": true
+    }
   },
   "dependencies": {
     "autoprefixer": "^7.1.5",
@@ -26,5 +28,8 @@
     "eslint": "^4.9.0",
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-react": "^7.4.0"
+  },
+  "scripts": {
+    "webpack:deploy": "webpack --config ./webpack.config.js --progress"
   }
 }
