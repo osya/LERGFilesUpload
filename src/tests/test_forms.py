@@ -13,24 +13,21 @@ class TestRegisterForm:
 
     def test_validate_user_already_registered(self, user):
         """Enter username that is already registered."""
-        form = RegisterForm(username=user.username, email='foo@bar.com',
-                            password='example', confirm='example')
+        form = RegisterForm(username=user.username, email='foo@bar.com', password='example', confirm='example')
 
         assert form.validate() is False
         assert 'Username already registered' in form.username.errors
 
     def test_validate_email_already_registered(self, user):
         """Enter email that is already registered."""
-        form = RegisterForm(username='unique', email=user.email,
-                            password='example', confirm='example')
+        form = RegisterForm(username='unique', email=user.email, password='example', confirm='example')
 
         assert form.validate() is False
         assert 'Email already registered' in form.email.errors
 
     def test_validate_success(self, db):
         """Register with success."""
-        form = RegisterForm(username='newusername', email='new@test.test',
-                            password='example', confirm='example')
+        form = RegisterForm(username='newusername', email='new@test.test', password='example', confirm='example')
         assert form.validate() is True
 
 
@@ -79,7 +76,8 @@ class TestUploadForm:
         assert form.validate() is True
 
     def test_validate_file_exists(self, app):
-        file_upload = os.path.abspath(os.path.join(app.config['PROJECT_ROOT'], os.pardir,
-                                                   'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
+        file_upload = os.path.abspath(
+            os.path.join(app.config['PROJECT_ROOT'], os.pardir,
+                         'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
         form = UploadForm(file_upload=file_upload)
         assert form.validate() is True

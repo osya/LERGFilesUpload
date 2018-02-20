@@ -131,8 +131,8 @@ def login_and_upload(testapp, user):
 
     res = testapp.get(url_for('lerg.upload'))
     form = res.forms['uploadForm']
-    filename = op.abspath(op.join(testapp.app.config['PROJECT_ROOT'], os.pardir,
-                                  'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
+    filename = op.abspath(
+        op.join(testapp.app.config['PROJECT_ROOT'], os.pardir, 'Jurisdiction_OCN_LATA_ABLock_Upload_2016-05-9 (2).csv'))
     form['file_upload'] = Upload(filename)
     return form.submit()
 
